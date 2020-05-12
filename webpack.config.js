@@ -13,8 +13,17 @@ module.exports = {
     publicPath: '/dist/'
   },
 
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      include: /src/,
+      loader: 'babel'
+    }]
+  },
+
   devServer: {
     port: 9000
-  },
+  }
 
 }
