@@ -6,7 +6,12 @@ const webpack = require('webpack')
 module.exports = {
   devtool: 'source-map',
 
-  entry: path.join(__dirname, 'src', 'index'),
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:3002',
+    'webpack/hot/only-dev-server',
+    path.join(__dirname, 'src', 'index')
+  ],
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -22,6 +27,10 @@ module.exports = {
       loader: 'babel'
     }]
   },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
 
   devServer: {
     port: 9000
