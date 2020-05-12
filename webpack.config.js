@@ -4,36 +4,43 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  devtool: 'source-map',
+    devtool: 'source-map',
 
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3002',
-    'webpack/hot/only-dev-server',
-    path.join(__dirname, 'src', 'index')
-  ],
+    entry: [
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?http://localhost:3002',
+        'webpack/hot/only-dev-server',
+        path.join(__dirname, 'src', 'index')
+    ],
 
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/dist/'
-  },
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/dist/'
+    },
 
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      include: /src/,
-      loader: 'babel'
-    }]
-  },
+    module: {
+        preLoaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            include: /src/,
+            loader: 'standard'
+        }],
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            include: /src/,
+            loader: 'babel'
+        }]
+    },
 
-  devServer: {
-    port: 9000
-  }
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
+
+    devServer: {
+        port: 9000
+    }
 
 }
